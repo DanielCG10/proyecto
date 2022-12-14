@@ -1,0 +1,292 @@
+main::[]->[Int]:{
+
+	Opc::Int;
+	
+
+	show: ".......................";
+	show: "	MENU";
+	
+	show: ".....1. Programa 1.....";
+	show: ".....2. Programa 2.....";
+	show: ".....3. Programa 3.....";
+	show: ".....4. Salir     .....";
+	show: "      Elige: "; 
+	load:Opc;
+
+	[$Opc != 4]@
+	{
+	
+		[$Opc = 1]?
+		{
+			show: "........................................";
+
+			a::Dec;
+			b::Dec;
+			c::Dec;
+			d::Dec;
+			e::Dec;
+			mayor::Dec;
+			menor::Dec;
+
+			show: "5 Numeros enteros e imprime el mayor.";
+			show: "Digite el primer numero:";
+			load:a;
+			show: "Digite el segundo numero:";
+			load:b;
+			show: "Digite el tercer numero:";
+			load:c;
+			show: "Digite el cuarto numero:";
+			load:d;
+			show: "Digite el quinto numero:";
+			load:e;
+
+			[$a > $b]?
+			{
+				mayor:: $a;
+			}|{			
+				mayor:: $b;
+			}
+			[$c > $mayor]?
+			{
+				mayor:: $c;
+			}
+			[$d > $mayor]?
+			{		
+				mayor:: $d;			
+			}
+			[$e > $mayor]?
+			{		
+				mayor:: $e;			
+			}
+			show: "El numero mayor es " , $mayor;
+
+
+			[$a < $b]?
+			{
+				menor:: $a;
+			}|{			
+				menor:: $b;
+			}
+			[$c < $menor]?
+			{
+				menor:: $c;
+			}
+			[$d < $menor]?
+			{		
+				menor:: $d;			
+			}
+			[$e < $menor]?
+			{		
+				menor:: $e;			
+			}
+			show: "El numero menor es " , $menor;
+			
+		}[$Opc = 2]|?
+		{
+
+			show: "........................................";
+			show: "Arreglo de 10 numeros e impresion de mayor a menor y visceversa.";
+
+			Menor::Int;
+			
+			Num::Dec;
+		
+			numeros:Dec[10];
+
+			show: "........................................";
+			show: "Ingresa 10 numeros.";
+
+                        [ a:0 \ $a<=9 \ a:$a + 1 ]@
+                        {
+                                show: "Ingrese un numero: ";
+                                load: Num;
+                                numeros:[$a,$Num];
+				
+                        }
+			show: "........................................";
+                        [ a3:0 \ $a3<=9 \ a3:$a3 + 1 ]@
+                        {	
+				
+				equis::Int;
+			
+				equis: $a3 + 1;
+				
+	                        [ a4:0 \ $a4<=8 \ a4:$a4 + 1 ]@
+                                {
+				
+					[$numeros[$a4] < $numeros[$equis]]?
+					{
+					
+						tmp::Dec;
+						tmp: $numeros[ $equis ];
+						numeros[$equis]:$numeros[$a4];
+						numeros[$a4]:$tmp;
+					
+					}
+
+                                }
+				                     
+                        }
+
+                        show: "........................................";
+			show: "Arreglo en orden de mayor a menor:";
+
+                        [ a2:0 \ $a2<=9 \ a2:$a2 + 1 ]@
+                        {
+
+                                show: $numeros, $a2;
+                        }
+			
+                        show: "........................................";
+			show: "Arreglo en orden de menor a mayor:";
+
+                        [ a5:9 \ $a5>=0 \ a5:$a5 - 1 ]@
+                        {
+
+                                show: $numeros, $a5;
+                        }
+                        show: "........................................";
+			
+		}[$Opc = 3]|?{
+		
+			show: "........................................";
+			show: "Moda, media y mediana de 10 numeros.";
+
+			entrada:Dec[10];
+			Auxiliar:Dec[10];			
+			Numero::Int;
+			cont::Int;
+			Posicion::Int;
+			cont1::Int;
+			posicionMayor::Int;		
+			Num::Dec;
+                        show: "Ingresa 10 numeros: ";
+
+                        [ a:0 \ $a<10 \ a:$a + 1 ]@
+                        {
+                                show: "Ingresa un numero: ";
+                                load: Num;
+                                entrada:[$a,$Num];
+
+                        }
+
+			
+		        [ cont:0 \ $cont<10 \ cont:$cont + 1 ]@
+                        {
+                                
+                                Auxiliar[$cont]:0;
+
+                        }
+	
+                        [ cont:0 \ $cont<10 \ cont:$cont + 1 ]@
+			{                                     
+			       
+				Numero:$entrada[$cont];
+				Posicion:$cont;
+			        [ cont1:$cont \ $cont1<10 \ cont1:$cont1 + 1 ]@
+	                        {
+		
+                                     [$entrada[$cont1]=$Numero]?
+			             {
+					Auxiliar[$Posicion]+: 1;
+				     }
+
+	                        }
+
+
+                        }
+                        Mayor::Dec;
+			Cero::Int;
+			Cero:0;
+			Mayor: $Auxiliar[$Cero];
+
+			posicionMayor:0;
+			
+			[ cont:0 \ $cont<10 \ cont:$cont + 1 ]@
+                        {
+
+                                [$Auxiliar[$cont]>$Mayor]?
+				{
+					posicionMayor:$cont;
+					Mayor:$Auxiliar[$cont];
+				}
+
+                        }
+		
+			show: "........................................";
+			show: "..Moda: ";
+		        show:  $entrada , $posicionMayor;
+		
+			Bandera::Int;
+			Bandera: 0;
+
+		        [ a3:0 \ $a3<10 \ a3:$a3 + 1 ]@
+                        {
+
+                                pos::Int;
+
+                                pos: $a3 + 1;
+
+                                [ a4:0 \ $a4<10 \ a4:$a4 + 1 ]@
+                                {
+
+                                        [$entrada[$a4] < $entrada[$pos]]?
+                                        {
+
+                                                temporal::Dec;
+                                                temporal: $entrada[ $pos ];
+                                                entrada[$pos]:$entrada[$a4];
+                                                entrada[$a4]:$temporal;
+
+                                        }
+
+                                }
+
+                        }
+                        show: "........................................";
+			show: "..Mediana:";
+			show: $entrada,5;
+			show: "Y";
+			show: $entrada,4;
+		
+			SUMA::Dec;
+			SUMA:0.0;
+			[ cont:0 \ $cont<10 \ cont:$cont + 1 ]@
+                        {
+
+                               SUMA+:$entrada[$cont];
+
+                        }
+			
+			MEDIA::Dec;
+			MEDIA:0.0;
+	
+			MEDIA: $SUMA / 10;
+
+			show: "........................................";
+			show: "..Media: ",$MEDIA;
+			show: "........................................";
+			
+		}|{
+			show: "Error"; 
+			
+		}
+		
+		show: ".......................";
+		show: "	MENU";
+		
+		show: ".....1. Programa 1.....";
+		show: ".....2. Programa 2.....";
+		show: ".....3. Programa 3.....";
+		show: ".....4. Salir     .....";
+		show: "      Elige: ";  
+		load:Opc;
+		
+	}
+	
+	
+	
+	
+	answer:0;
+}
+
